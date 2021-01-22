@@ -1,19 +1,27 @@
 class StudentsController < ApplicationController
 
-   def index
-    @students = Coupon.all
-  end
-
   def show
-    @students = Coupon.find(params[:id])
+    @students = Student.find(params[:id])
   end
 
   def new
+    @student = Student.new
+  end
+
+  def edit
+    @student = Student.find(params[:id])
   end
 
   def create
-      @coupon = Coupon.create(coupon_code: params[:coupon][:coupon_code], store: params[:coupon][:store])
-      redirect_to coupon_path(@coupon)
+    @student = Student.new(params.require(:student)
+	  @student.save
+	  redirect_to student_path(@student)
   end
+
+  def update
+	  @student = Student.find(params[:id])
+	  @student.update(params.require(:student)
+	  redirect_to student_path(@student)
+	end
 
 end
