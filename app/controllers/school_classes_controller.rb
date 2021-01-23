@@ -1,3 +1,5 @@
+require 'pry'
+
 class SchoolClassesController < ApplicationController
 
 
@@ -14,15 +16,16 @@ class SchoolClassesController < ApplicationController
   end
 
   def create
-    @school_class = SchoolClass.new(params.require(:school_class))
+    #binding.pry
+    @school_class = SchoolClass.new(params.require(:school_class).permit!)
 	@school_class.save
 	redirect_to school_class_path(@school_class)
   end
 
   def update
 	@school_class = SchoolClass.find(params[:id])
-	@school_class.update(params.require(:school_class))
-	redirect_to student_path(@school_class)
+	@school_class.update(params.require(:school_class).permit!)
+	redirect_to school_class_path(@school_class)
    end
 
 end
